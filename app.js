@@ -5,9 +5,6 @@ var app = new Vue({
 	},
 	computed: {
 		parsed: function(){
-			var parsedLines = [];
-			var commentRegex = /^\s*#.*/;
-			var isBetweenTabDirectives = false;
 			return this.getLines(this.source);
 		}
 	},
