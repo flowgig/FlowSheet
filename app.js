@@ -16,6 +16,9 @@ var app = new Vue({
 					text: line,
 					chords: this.parseChord(line)
 				}
+				parsedLine.chords.forEach(function(chord){
+					parsedLine.text = parsedLine.text.replace(chord.markup, "<span class='chord'>" + chord.name + "</span>");
+				});
 				lines.push(parsedLine);
 			}.bind(this));
 			return lines;
