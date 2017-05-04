@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ChordPro-test</title>
+</head>
+<body>
+	<div id="app">
+		<textarea v-model="source"></textarea>
+		<div class="result">
+			<pre>
+				{{ source }}
+			</pre>
+		</div>
+		<div v-for="line in parsed">
+			<p>{{ line }}</p>
+		</div> 
+	</div>
+
+
+	<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
