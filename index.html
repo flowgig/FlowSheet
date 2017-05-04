@@ -2,21 +2,15 @@
 <html>
 <head>
 	<title>ChordPro-test</title>
+	<link rel="stylesheet" type="text/css" href="app.css">
 </head>
 <body>
 	<div id="app">
 		<textarea v-model="source"></textarea>
-		<div class="result">
-			<pre>
-				{{ source }}
-			</pre>
+		<div class="lines">
+			<p v-for="line in parsed" v-html="line.text"></p>
 		</div>
-		<div v-for="line in parsed">
-			<p>{{ line }}</p>
-		</div> 
 	</div>
-
-
 	<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
 	<script type="text/javascript" src="app.js"></script>
 </body>

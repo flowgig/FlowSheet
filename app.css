@@ -1,0 +1,9 @@
+.lines p{
+	margin-top: 2em;
+}
+.chord{
+	position: relative;
+	top: -1em;
+	display: inline-block;
+	width: 0;
+}
