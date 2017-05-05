@@ -13,11 +13,32 @@ var app = new Vue({
 			var lines = [];
 			source.split('\n').forEach(function(line) {
 				parsedLine = {
-					text: line,
+					lyricString: line,
 					chords: this.parseChord(line)
 				}
+				var index = 0;
+				var chordline = "";
+				if(parsedLine.chords.length){
+					while (index < line.length){
+						var isChord = false;
+						parsedLine.chords.forEach(function(chord){
+							if (chord.position == index){
+								chordline += chord.name;
+								index += chord.name.length;
+								isChord = true;
+							}
+						});
+						if (!isChord){
+							chordline += "&nbsp;";
+							index++;
+						}
+					}
+				}else{
+					chordline = "&nbsp;";
+				}
+				parsedLine.chordString = chordline;
 				parsedLine.chords.forEach(function(chord){
-					parsedLine.text = parsedLine.text.replace(chord.markup, "<span class='chord'>" + chord.name + "</span>");
+					parsedLine.lyricString = parsedLine.lyricString.replace(chord.markup, "");
 				});
 				lines.push(parsedLine);
 			}.bind(this));
@@ -36,13 +57,12 @@ var app = new Vue({
 			    // The result can be accessed through the `m`-variable.
 			    m.forEach(function(match, groupIndex) {
 			    	if (groupIndex == 0) {chord.markup = match}
-			    	if (groupIndex == 1) {chord.name = match}
-			    });
+			    		if (groupIndex == 1) {chord.name = match}
+			    	});
 			    chord.position = m.index;
 			    chords.push(chord);
 			}
 			return chords;
 		}
-
 	}
 });
