@@ -6,6 +6,9 @@ var app = new Vue({
 	computed: {
 		lines: function(){
 			return this.getLines(this.source);
+		},
+		directives: function(){
+			return this.getDirectives(this.source);
 		}
 	},
 	methods: {
@@ -19,6 +22,45 @@ var app = new Vue({
 				lines.push(parsedLine);
 			}.bind(this));
 			return lines;
+		},
+		getDirectives: function(source){
+			var directives = this.parseDirectives(source) !== undefined ? this.parseDirectives(source) : [];
+			return directives;
+		},
+		parseDirectives: function(source) {
+			var regex = /\{\s*([^:}]*)\s*:{0,1}\s*(.*?)\s*}/g;
+			var m;
+			var directives = [];
+			while ((m = regex.exec(source)) !== null) {
+				if (m.index === regex.lastIndex) {
+					regex.lastIndex++;
+				}
+				var directive = {};
+				m.forEach((match, groupIndex) => {
+					if (groupIndex == 0) {directive.markup = match}
+						if (groupIndex == 1) {
+							directive.type = this.getDirectiveType(match)
+						}
+						if (groupIndex == 2) {
+							directive.name = match
+						}
+					});
+				directives.push(directive);
+			}
+			return directives;
+		},
+		getDirectiveType: function(directiveType) {
+			directiveType = directiveType.toLowerCase();
+			switch (directiveType) {
+				case 't':
+				return 'title';
+				case 'st':
+				return 'subtitle';
+				case 'c':
+				return 'comment';
+				default:
+				return directiveType;
+			}
 		},
 		parseLyricLine: function(line){
 			var chords = this.getChords(line)

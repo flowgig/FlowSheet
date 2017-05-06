@@ -7,6 +7,14 @@
 <body>
 	<div id="app">
 		<textarea v-model="source"></textarea>
+		<div class="directives">
+			<div v-for="directive in directives" class="directive">
+				<h1 v-if="directive.type == 'title'">{{ directive.name}}</h1>
+				<h2 v-if="directive.type == 'subtitle'">{{ directive.name}}</h2>
+				<span v-if="directive.type == 'comment'" class="comment">{{ directive.name}}</span>
+			</div>
+		</div>
+		<hr />
 		<div class="lines">
 			<div v-for="line in lines" class="line">
 				<div v-html="line.chordString"></div>
