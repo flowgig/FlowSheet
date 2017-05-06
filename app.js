@@ -15,6 +15,7 @@ var app = new Vue({
 		getLines: function(source){
 			var lines = [];
 			source.split('\n').forEach(function(line) {
+				line = this.removeDirectives(line);
 				var parsedLine = {
 					lyricString: this.parseLyricLine(line),
 					chordString: this.parseChordLine(line)
@@ -26,6 +27,15 @@ var app = new Vue({
 		getDirectives: function(source){
 			var directives = this.parseDirectives(source) !== undefined ? this.parseDirectives(source) : [];
 			return directives;
+		},
+		removeDirectives: function(line){
+			var directives = this.parseDirectives(line);
+			if (directives !== undefined && directives.length){
+				directives.forEach(function(directive){
+					line = line.replace(directive.markup, '');
+				})
+			}
+			return line;
 		},
 		parseDirectives: function(source) {
 			var regex = /\{\s*([^:}]*)\s*:{0,1}\s*(.*?)\s*}/g;
