@@ -8,7 +8,7 @@
 	<div id="app">
 		<textarea v-model="source"></textarea>
 		<div class="lines">
-			<div v-for="line in parsed" class="line">
+			<div v-for="line in lines" class="line">
 				<div v-html="line.chordString"></div>
 				<div v-html="line.lyricString"></div>
 			</div>

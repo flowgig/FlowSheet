@@ -4,7 +4,7 @@ var app = new Vue({
 		source: ''
 	},
 	computed: {
-		parsed: function(){
+		lines: function(){
 			return this.getLines(this.source);
 		}
 	},
