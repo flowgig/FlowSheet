@@ -101,18 +101,20 @@ var app = new Vue({
 			var m;
 			var chords = [];
 			while ((m = regex.exec(line)) !== null) {
-			    // This is necessary to avoid infinite loops with zero-width matches
-			    if (m.index === regex.lastIndex) {
-			    	regex.lastIndex++;
-			    }
-			    var chord = {};
-			    // The result can be accessed through the `m`-variable.
-			    m.forEach(function(match, groupIndex) {
-			    	if (groupIndex == 0) {chord.markup = match}
-			    		if (groupIndex == 1) {chord.name = match}
-			    	});
-			    chord.position = m.index;
-			    chords.push(chord);
+				if (m.index === regex.lastIndex) {
+					regex.lastIndex++;
+				}
+				var chord = {};
+				m.forEach(function(match, groupIndex) {
+					if (groupIndex == 0) {
+						chord.markup = match
+					}
+					if (groupIndex == 1) {
+						chord.name = match
+					}
+				});
+				chord.position = m.index;
+				chords.push(chord);
 			}
 			return chords;
 		}
