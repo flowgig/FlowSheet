@@ -1,7 +1,10 @@
 var app = new Vue({
 	el: '#app',
 	data: {
-		source: ''
+		source: `{t:this is the title} {st:this is the subtitle}{c:this is a comment}
+{c:this is a another comment}
+thi[am]s is th[g]e firs[dm]t line
+and th[am]is is the [gm7]second`
 	},
 	computed: {
 		lines: function(){
