@@ -1,6 +1,11 @@
 body{
 	font-family: Verdana, sans-serif;
 }
+textarea{
+	min-height: 100px;
+	width: 100%;
+	font-size: 14px;
+}
 .lines{
 	font-family: "Consolas", "Lucida Console", Monaco, monospace;
 }
