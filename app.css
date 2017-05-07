@@ -1,11 +1,39 @@
+*{
+	box-sizing: border-box;
+}
 body{
 	font-family: Verdana, sans-serif;
+	color: #333;
 }
 textarea{
 	min-height: 100px;
 	width: 100%;
+	max-width: 100%;
 	font-size: 14px;
 }
-.lines{
+
+.comment{
+	font-style: italic;
+	color: #777;
+}
+
+.chord-string, .lyric-string{
 	font-family: "Consolas", "Lucida Console", Monaco, monospace;
+}
+
+.clearfix{
+	clear: both;
+}
+
+@media (min-width: 768px){
+	.source-input{
+		width: 40%;
+		float: left;
+		padding: 16px;
+	}
+	.lines{
+		width: 60%;
+		float: left;
+		padding: 16px;
+	}
 }
