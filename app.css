@@ -12,9 +12,37 @@ textarea{
 	font-size: 14px;
 }
 
+ul.addChord, ul.activeChord{
+	list-style: none;
+	padding: 0;
+}
+
+ul.addChord li{
+	display: inline-block;
+	border: 1px solid #DDD;
+	margin-right: 4px;
+	margin-bottom: 4px;
+	padding: 4px;
+	border-radius: 3px;
+	text-align: center;
+	width: 34px;
+}
+
+ul.addChord li.active{
+	background-color: #ddd;
+}
+ul.activeChord li{
+	color: #C32A22;
+	cursor: pointer;
+}
+
+
+
 .meta-info .meta-info-data span{
 	display: block;
+	
 }
+
 .comment{
 	font-style: italic;
 	color: #777;

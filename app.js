@@ -7,6 +7,19 @@ var app = new Vue({
 		{c:this is a another comment}
 		thi[am]s is th[g]e firs[dm]t line
 		and th[am]is is the [gm7]second`,
+		keys: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"],
+		chords: [],
+		activeChord: {}
+	},
+	created: function(){
+		var chords = []
+		this.keys.forEach(function(key){
+			chords.push({
+				name: key,
+				variations: this.getVariations(key)
+			});
+		}.bind(this));
+		this.chords = chords;
 	},
 	computed: {
 		lines: function(){
@@ -18,6 +31,32 @@ var app = new Vue({
 		}
 	},
 	methods: {
+		getVariations: function(key){
+			var variations = [
+			{
+				name: key,
+				markup: `[${key}]`
+			},
+			{
+				name: `${key} minor`,
+				markup: `[${key}m]`
+			},
+			{
+				name: `${key} 6`,
+				markup: `[${key}6]`
+			},
+			{
+				name: `${key} 7`,
+				markup: `[${key}7]`
+			},
+			{
+				name: `${key} Maj7`,
+				markup: `[${key}maj7]`
+			},
+			];
+			return variations;
+
+		},
 		getMetaInfo: function(lines){
 			var metaInfo = {}
 			lines.forEach(function(line){
@@ -150,6 +189,12 @@ var app = new Vue({
 				chords.push(chord);
 			}
 			return chords;
+		},
+		insertTextAtCursor: function(text) {
+			var el = document.getElementById("source-input");
+			var val = el.value, endIndex, range;
+			endIndex = el.selectionEnd;
+			this.source = val.slice(0, el.selectionStart) + text + val.slice(endIndex);
 		}
 	}
 });

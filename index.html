@@ -8,7 +8,16 @@
 	<div id="app">
 		
 		<div class="source-input">
-			<textarea v-model="source"></textarea>
+			<ul class="addChord">
+				<li v-bind:class="[activeChord == chord ? 'active' : '']" 
+				v-on:click="activeChord = chord" 
+				v-for="chord in chords">{{ chord.name }}
+			</li>
+		</ul>
+		<ul class="activeChord">
+			<li v-for="variation in activeChord.variations" v-on:click='insertTextAtCursor(variation.markup)'>{{variation.name}}</li>
+		</ul>
+		<textarea id="source-input" v-model="source"></textarea>
 	</div>
 
 	<div class="lines">
