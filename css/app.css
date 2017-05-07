@@ -52,6 +52,10 @@ ul.activeChord li{
 	font-family: "Consolas", "Lucida Console", Monaco, monospace;
 }
 
+.chord-string{
+	color: #C32A22;
+}
+
 .clearfix{
 	clear: both;
 }
