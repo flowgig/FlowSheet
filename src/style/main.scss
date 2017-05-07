@@ -1,0 +1,28 @@
+*{
+	box-sizing: border-box;
+}
+body{
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: #333;
+	margin-top: 30px;
+}
+h1, h2 {
+	font-weight: normal;
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	display: inline-block;
+	margin: 0 10px;
+}
+textarea{
+	min-height: 100px;
+	width: 100%;
+	max-width: 100%;
+	font-size: 14px;
+}
