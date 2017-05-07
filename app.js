@@ -104,7 +104,7 @@ and th[am]is is the [gm7]second`
 						index++;
 					}
 				}
-			}else{
+			}else if(line.length){
 				chordline = "&nbsp;";
 			}
 			return chordline;
