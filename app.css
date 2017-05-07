@@ -12,6 +12,9 @@ textarea{
 	font-size: 14px;
 }
 
+.meta-info .meta-info-data span{
+	display: block;
+}
 .comment{
 	font-style: italic;
 	color: #777;

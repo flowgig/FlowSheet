@@ -6,23 +6,41 @@
 </head>
 <body>
 	<div id="app">
+		
 		<div class="source-input">
 			<textarea v-model="source"></textarea>
-		</div>
-		<div class="lines">
-			<div v-for="line in lines" class="line">
-				<div v-for="directive in line.directives" class="directive">
-					<h1 v-if="directive.type == 'title'">{{ directive.name}}</h1>
-					<h2 v-if="directive.type == 'subtitle'">{{ directive.name}}</h2>
-					<span v-if="directive.type == 'comment'" class="comment">{{ directive.name}}</span>
-				</div>
-				<div v-html="line.chordString" class="chord-string"></div>
-				<div v-html="line.lyricString" class="lyric-string"></div>
+	</div>
+
+	<div class="lines">
+	
+		<div class="meta-info">
+			<h1 v-if="metaInfo.title">{{ metaInfo.title }}</h1>
+			<h2 v-if="metaInfo.subtitle">{{ metaInfo.subtitle }}</h2>
+			<div class="meta-info-data">
+				<span v-if="metaInfo.key" class="key">
+					Key: {{ metaInfo.key }}
+				</span>
+				<span v-if="metaInfo.time" class="time">Signature: {{ metaInfo.time }}</span>
+				<span v-if="metaInfo.tempo" class="tempo">
+					Bpm: {{ metaInfo.tempo }}
+				</span>
+				<span v-if="metaInfo.duration" class="duration">
+					Duration: {{ metaInfo.duration }}
+				</span>
 			</div>
 		</div>
-		<div class="clearfix"></div>
+
+		<div v-for="line in lines" class="line">
+			<div v-for="directive in line.directives" class="directive">
+				<span v-if="directive.type == 'comment'" class="comment">{{ directive.name}}</span>
+			</div>
+			<div v-html="line.chordString" class="chord-string"></div>
+			<div v-html="line.lyricString" class="lyric-string"></div>
+		</div>
 	</div>
 	<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
 	<script type="text/javascript" src="app.js"></script>
+	<div class="clearfix"></div>
+</div>
 </body>
 </html>

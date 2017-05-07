@@ -1,17 +1,37 @@
 var app = new Vue({
 	el: '#app',
 	data: {
-		source: `{t:this is the title} {st:this is the subtitle}{c:this is a comment}
-{c:this is a another comment}
-thi[am]s is th[g]e firs[dm]t line
-and th[am]is is the [gm7]second`
+		source: `{t:this is the title} {st:this is the subtitle}
+		{key:Am}{time:4/4}{tempo:96}{duration:3:26}
+		{c:this is a comment}
+		{c:this is a another comment}
+		thi[am]s is th[g]e firs[dm]t line
+		and th[am]is is the [gm7]second`,
 	},
 	computed: {
 		lines: function(){
 			return this.getLines(this.source);
+		},
+		metaInfo: function(){
+			var metaInfo = this.lines.length ? this.getMetaInfo(this.lines) : {};
+			return metaInfo;
 		}
 	},
 	methods: {
+		getMetaInfo: function(lines){
+			var metaInfo = {}
+			lines.forEach(function(line){
+				line.directives.forEach(function(directive){
+					if (directive.type == 'title') metaInfo.title = directive.name;
+					if (directive.type == 'subtitle') metaInfo.subtitle = directive.name;
+					if (directive.type == 'key') metaInfo.key = directive.name;
+					if (directive.type == 'time') metaInfo.time = directive.name;
+					if (directive.type == 'tempo') metaInfo.tempo = directive.name;
+					if (directive.type == 'duration') metaInfo.duration = directive.name;
+				});
+			});
+			return metaInfo;
+		},
 		getLines: function(source){
 			var lines = [];
 			source.split('\n').forEach(function(line) {
