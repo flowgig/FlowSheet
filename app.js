@@ -9,26 +9,26 @@ and th[am]is is the [gm7]second`
 	computed: {
 		lines: function(){
 			return this.getLines(this.source);
-		},
-		directives: function(){
-			return this.getDirectives(this.source);
 		}
 	},
 	methods: {
 		getLines: function(source){
 			var lines = [];
 			source.split('\n').forEach(function(line) {
+				var directives = this.getDirectives(line);
+
 				line = this.removeDirectives(line);
 				var parsedLine = {
 					lyricString: this.parseLyricLine(line),
-					chordString: this.parseChordLine(line)
+					chordString: this.parseChordLine(line),
+					directives: directives
 				};
 				lines.push(parsedLine);
 			}.bind(this));
 			return lines;
 		},
-		getDirectives: function(source){
-			var directives = this.parseDirectives(source) !== undefined ? this.parseDirectives(source) : [];
+		getDirectives: function(line){
+			var directives = this.parseDirectives(line) !== undefined ? this.parseDirectives(line) : [];
 			return directives;
 		},
 		removeDirectives: function(line){
@@ -40,11 +40,11 @@ and th[am]is is the [gm7]second`
 			}
 			return line;
 		},
-		parseDirectives: function(source) {
+		parseDirectives: function(line) {
 			var regex = /\{\s*([^:}]*)\s*:{0,1}\s*(.*?)\s*}/g;
 			var m;
 			var directives = [];
-			while ((m = regex.exec(source)) !== null) {
+			while ((m = regex.exec(line)) !== null) {
 				if (m.index === regex.lastIndex) {
 					regex.lastIndex++;
 				}
