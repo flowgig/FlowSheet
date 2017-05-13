@@ -40,13 +40,14 @@
 
 
 
-      <footer></footer> <!-- TODO: main-footer module -->
+      <main-footer></main-footer>
     </main>
   </div>
 </template>
 
 <script>
   import MainNavigation from './MainNavigation.vue';
+  import MainFooter from './MainFooter.vue';
   import Modals from './Modals.vue';
   import * as quark from 'quark-gui';
 
@@ -54,6 +55,7 @@
     name: 'app',
     components: {
       mainNavigation: MainNavigation,
+      mainFooter: MainFooter,
       modals: Modals
     },
     data () {
