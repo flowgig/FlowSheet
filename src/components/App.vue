@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav></nav> <!-- TODO: main-navigation module -->
+    <main-navigation></main-navigation>
     <main id="mainContent">
       <div class="main-content">
         <div class="source-input">
@@ -46,12 +46,14 @@
 </template>
 
 <script>
+  import MainNavigation from './MainNavigation.vue';
   import Modals from './Modals.vue';
   import * as quark from 'quark-gui';
 
   export default {
     name: 'app',
     components: {
+      mainNavigation: MainNavigation,
       modals: Modals
     },
     data () {
