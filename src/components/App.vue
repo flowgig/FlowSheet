@@ -1,63 +1,70 @@
 <template>
   <div id="app">
-    <div class="source-input">
-      <ul class="addChord">
-        <li v-bind:class="[activeChord == chord ? 'active' : '']" 
-        v-on:click="activeChord = chord" 
-        v-for="chord in chords">{{ chord.name }}
-      </li>
-    </ul>
-    <ul class="activeChord">
-      <li v-for="variation in activeChord.variations" v-on:click='insertTextAtCursor(variation.markup)'>{{variation.name}}</li>
-    </ul>
-    <textarea id="source-input" v-model="source"></textarea>
-  </div>
+    <nav></nav> <!-- TODO: main-navigation module -->
+    <main id="mainContent">
+      <div class="main-content">
+        <div class="source-input">
+          <textarea id="source-input" v-on:keyup="updateFromMarkupEditor()" v-model="source"></textarea>
+        </div>
 
-  <div class="lines">
-    <div class="meta-info">
-      <h1 v-if="metaInfo.title">{{ metaInfo.title }}</h1>
-      <h2 v-if="metaInfo.subtitle">{{ metaInfo.subtitle }}</h2>
-      <div class="meta-info-data">
-        <span v-if="metaInfo.key" class="key">
-          Key: {{ metaInfo.key }}
-        </span>
-        <span v-if="metaInfo.time" class="time">Signature: {{ metaInfo.time }}</span>
-        <span v-if="metaInfo.tempo" class="tempo">
-          Bpm: {{ metaInfo.tempo }}
-        </span>
-        <span v-if="metaInfo.duration" class="duration">
-          Duration: {{ metaInfo.duration }}
-        </span>
-      </div>
-    </div>
+        <div class="lines">
+          <div class="meta-info">
+            <h1 v-if="metaInfo.title">{{ metaInfo.title }}</h1>
+            <h2 v-if="metaInfo.subtitle">{{ metaInfo.subtitle }}</h2>
+            <div class="meta-info-data">
+              <span v-if="metaInfo.key" class="key">
+                Key: {{ metaInfo.key }}
+              </span>
+              <span v-if="metaInfo.time" class="time">Signature: {{ metaInfo.time }}</span>
+              <span v-if="metaInfo.tempo" class="tempo">
+                Bpm: {{ metaInfo.tempo }}
+              </span>
+              <span v-if="metaInfo.duration" class="duration">
+                Duration: {{ metaInfo.duration }}
+              </span>
+            </div>
+          </div>
 
-    <div v-for="line in lines" class="line">
-      <div v-for="directive in line.directives" class="directive">
-        <span v-if="directive.type == 'comment'" class="comment">{{ directive.name}}</span>
+          <div v-for="line in lines" class="line">
+            <div v-for="directive in line.directives" class="directive">
+              <span v-if="directive.type == 'comment'" class="comment">{{ directive.name}}</span>
+            </div>
+            <div v-html="line.chordString" class="chord-string"></div>
+            <div v-html="line.lyricString" class="lyric-string"></div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div v-for=""></div>
+        <modals></modals>
       </div>
-      <div v-html="line.chordString" class="chord-string"></div>
-      <div v-html="line.lyricString" class="lyric-string"></div>
-    </div>
+
+
+
+      <footer></footer> <!-- TODO: main-footer module -->
+    </main>
   </div>
-  <div class="clearfix"></div>
-</div>
 </template>
 
 <script>
+  import Modals from './Modals.vue';
+  import * as quark from 'quark-gui';
+
   export default {
     name: 'app',
+    components: {
+      modals: Modals
+    },
     data () {
       return {
         metaInfo: {},
         source: `{t:this is the title} {st:this is the subtitle}
-        {key:Am}{time:4/4}{tempo:96}{duration:3:26}
-        {c:this is a comment}
-        {c:this is a another comment}
-        thi[am]s is th[g]e firs[dm]t line
-        and th[am]is is the [gm7]second`,
+{key:Am}{time:4/4}{tempo:96}{duration:3:26}
+{c:this is a comment}
+{c:this is a another comment}
+thi[am]s is th[g]e firs[dm]t line
+and th[am]is is the [gm7]second`,
         keys: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"],
         chords: [],
-        activeChord: {}
       }
     },
     created (){
@@ -239,42 +246,17 @@
         }
         return chords;
       },
-      insertTextAtCursor: function(text) {
-        var el = document.getElementById("source-input");
-        var val = el.value, endIndex, range;
-        endIndex = el.selectionEnd;
-        this.source = val.slice(0, el.selectionStart) + text + val.slice(endIndex);
+      showModal: function(modalId){
+        document.getElementById(modalId).classList.add('active');
+      },
+      hideModal: function(modalId){
+        document.getElementById(modalId).classList.remove('active');
       }
     }
   }
 </script>
 
 <style lang="css">
-  ul.addChord, ul.activeChord{
-    list-style: none;
-    padding: 0;
-  }
-
-  ul.addChord li{
-    display: inline-block;
-    border: 1px solid #DDD;
-    margin-right: 4px;
-    margin-bottom: 4px;
-    padding: 4px;
-    border-radius: 3px;
-    text-align: center;
-    width: 34px;
-    cursor: pointer;
-  }
-
-  ul.addChord li.active{
-    background-color: #ddd;
-  }
-  ul.activeChord li{
-    color: #C32A22;
-    cursor: pointer;
-  }
-
   .meta-info .meta-info-data span{
     display: block;
   }
@@ -300,6 +282,10 @@
       width: 40%;
       float: left;
       padding: 16px;
+    }
+    .source-input textarea{
+      border: none;
+      min-height: 400px;
     }
     .lines{
       width: 60%;
