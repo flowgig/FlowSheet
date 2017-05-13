@@ -48,6 +48,7 @@
     name: 'app',
     data () {
       return {
+        metaInfo: {},
         source: `{t:this is the title} {st:this is the subtitle}
         {key:Am}{time:4/4}{tempo:96}{duration:3:26}
         {c:this is a comment}
@@ -68,17 +69,17 @@
         });
       }.bind(this));
       this.chords = chords;
+      this.getMetaInfo();
     },
     computed: {
       lines (){
         return this.getLines(this.source);
       },
-      metaInfo (){
-        var metaInfo = this.lines.length ? this.getMetaInfo(this.lines) : {};
-        return metaInfo;
-      }
     },
     methods: {
+      updateFromMarkupEditor: function(){
+        this.getMetaInfo();
+      },
       getVariations: function(key){
         var variations = [
         {
@@ -105,9 +106,9 @@
         return variations;
 
       },
-      getMetaInfo: function(lines){
+      getMetaInfo: function(){
         var metaInfo = {}
-        lines.forEach(function(line){
+        this.lines.forEach(function(line){
           line.directives.forEach(function(directive){
             if (directive.type == 'title') metaInfo.title = directive.name;
             if (directive.type == 'subtitle') metaInfo.subtitle = directive.name;
@@ -117,7 +118,7 @@
             if (directive.type == 'duration') metaInfo.duration = directive.name;
           });
         });
-        return metaInfo;
+        this.metaInfo = metaInfo;
       },
       getLines: function(source){
         var lines = [];
