@@ -18,40 +18,7 @@
                             src: 'src/images/svg/flowsheet-logo-white.svg',
                             alt: 'FlowSheet logo'
                         },
-                        url: "/"
-                    },
-                    primaryNavigationLeft: {
-                        id: "primary-navigation",
-                        listItems: [
-                            {
-                                name: "Link",
-                                link: "#"
-                            },
-                            {
-                                name: "Dropdown",
-                                link: "#",
-                                dropdownContent: {
-                                    listItems: [
-                                        {
-                                            name: "Songs",
-                                            link: "#",
-                                            iconClass: "fa fa-music"
-                                        },
-                                        {
-                                            name: "Gigs",
-                                            link: "#",
-                                            iconClass: "fa fa-calendar"
-                                        },
-                                        {
-                                            name: "Members",
-                                            link: "#",
-                                            iconClass: "fa fa-group"
-                                        }
-                                    ]
-                                }
-
-                            }
-                        ]
+                        url: "#"
                     },
                     sidebar: {
                         sidebarNavigation: {

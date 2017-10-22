@@ -20,7 +20,7 @@
                             src: 'src/images/svg/flowsheet-logo-gray-vertical.svg',
                             alt: 'FlowSheet logo'
                         },
-                        url: '/'
+                        url: '#'
                     },
                     content: `
                         <div class="text-center">
