@@ -20,7 +20,7 @@
                         },
                         url: "/"
                     },
-                    primaryNavigation: {
+                    primaryNavigationLeft: {
                         id: "primary-navigation",
                         listItems: [
                             {
