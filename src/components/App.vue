@@ -35,7 +35,7 @@
         </div>
         <div class="clearfix"></div>
         <div v-for=""></div>
-        <modals></modals>
+        <!--<modals></modals> -->
       </div>
 
 
