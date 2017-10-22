@@ -3,6 +3,11 @@
   "description": "Test app for parsing ChordPro formatted text",
   "version": "1.0.0",
   "author": "benjamindehli <superelg@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/flowgig/FlowSheet/issues"
+  },
+  "homepage": "https://github.com/flowgig/FlowSheet#readme",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
