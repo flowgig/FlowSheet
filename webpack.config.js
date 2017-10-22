@@ -34,7 +34,6 @@ module.exports = {
               fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
             })
           },
-
           // other vue-loader options go here
         }
       },
@@ -42,6 +41,11 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.quark$/,
+        loaders: ['babel-loader'],
+        exclude: '/node_modules/'
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
