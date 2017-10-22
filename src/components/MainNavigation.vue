@@ -16,7 +16,7 @@
                     logo: {
                         image: {
                             src: '', //TODO add logo require('../../images/svg/chordpro-editor-logo-white.svg'),
-                            alt: 'ChordPro Editor logo'
+                            alt: 'FlowSheet logo'
                         },
                         url: "/"
                     },

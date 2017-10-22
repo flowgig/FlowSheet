@@ -1,4 +1,4 @@
-# ChordPro-test
+# FlowSheet
 Test app for parsing ChordPro formatted text
 
 ## Build Setup
