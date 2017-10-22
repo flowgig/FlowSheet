@@ -17,7 +17,7 @@
                 var footerElement = quark.Organisms.Global.Footer.getModule({
                     logo: {
                         image: {
-                            src: '',//TODO add logo require('../../images/svg/flowgig-logo-gray.svg'),
+                            src: 'src/images/svg/flowsheet-logo-gray-vertical.svg',
                             alt: 'FlowSheet logo'
                         },
                         url: '/'
